@@ -1,0 +1,22 @@
+{
+  "name": "tic-tac-toe",
+  "version": "0.0.0",
+  "authors": [
+    "davidgertmenianwong <dgertmenianwong@gmail.com>"
+  ],
+  "description": "simple tic-tac-toe game app",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chai": "~1.9.2",
+    "mocha": "~2.0.1"
+  }
+}
