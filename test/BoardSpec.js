@@ -37,7 +37,7 @@ describe('Board', function(){
     });
   })
   describe('check board rows, columns and diagonals', function(){
-    it('should return the state of a row', function(){
+    it('should return the correct state of a row', function(){
       board.set(0, 0, 'O');
       board.set(0, 1, 'O');
       board.set(0, 2, 'O');
