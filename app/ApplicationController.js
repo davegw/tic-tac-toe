@@ -4,7 +4,7 @@
     this.statusEl = document.getElementById('status');
     this.boardEl = document.getElementById('board');
     this.initialize();
-  }
+  };
 
   ApplicationController.prototype = {
     initialize: function() {
@@ -49,7 +49,7 @@
       }
       if (cell.className.match(/\boccupied\b/)) {
         return this.statusEl.innerHTML = 'That space is already taken!';
-      };
+      }
 
       // Clear status message.
       this.statusEl.innerHTML = '';
@@ -75,7 +75,7 @@
       cell.className += ' occupied';
       cell.children[0].innerHTML = this.game.board.get(row, col);
     }
-  }
+  };
 
   new ApplicationController();
-})()
+})();

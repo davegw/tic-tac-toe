@@ -4,12 +4,12 @@ describe('Board', function(){
   var board;
   beforeEach(function(){
     board = new Board(3);
-  })
+  });
 
   describe('size', function(){
     it('should return the size inputted', function(){
       expect(board.size).to.equal(3);
-    })
+    });
   });
   describe('board instance', function(){
     it('should return an appropriately sized board array', function(){
@@ -35,7 +35,7 @@ describe('Board', function(){
       expect(board.get(1, 2)).to.equal('O');
       expect(board.get(2, 2)).to.be.null;
     });
-  })
+  });
   describe('check board rows, columns and diagonals', function(){
     it('should return the correct state of a row', function(){
       board.set(0, 0, 'O');
@@ -71,4 +71,4 @@ describe('Board', function(){
       expect(board.checkDiag()).to.be.true;
     });
   });
-})
+});

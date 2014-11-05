@@ -5,7 +5,7 @@ describe('Player', function(){
   beforeEach(function(){
     player1 = new Player('X');
     player2 = new Player('O');
-  })
+  });
 
   describe('marker', function(){
     it('should have a marker property', function(){

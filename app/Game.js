@@ -3,7 +3,7 @@ var Game = function(size) {
   this.players = [new Player('X'), new Player('O')];
   this.currentPlayer = this.players[0];
   this.moves = 0;
-}
+};
 
 Game.prototype = {
   // Place the current player's marker at the designated cell.
@@ -30,4 +30,4 @@ Game.prototype = {
   checkGameOver: function() {
     return this.moves === this.board.size*this.board.size;
   }
-}
+};

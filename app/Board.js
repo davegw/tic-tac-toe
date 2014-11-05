@@ -38,7 +38,7 @@ Board.prototype = {
 
     return this._board[row].every(function(cell) {
       return cell === marker;
-    })
+    });
   },
 
   // Check if input column contains all of same marker. Returns true or false.
@@ -54,12 +54,12 @@ Board.prototype = {
 
     return this._board.every(function(row) {
       return row[col] === marker;
-    })
+    });
   },
 
   // Check if diagonals contain all of same marker. Returns true or false.
   checkDiag: function() {
-    var majorDiag = this.get(0, 0)
+    var majorDiag = this.get(0, 0);
     var minorDiag = this.get(0, this.size - 1);
 
     var checkMajorDiag = majorDiag !== null && this._board.every(function(row, idx) {
@@ -71,4 +71,4 @@ Board.prototype = {
 
     return checkMajorDiag || checkMinorDiag;
   }
-}
+};

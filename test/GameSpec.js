@@ -4,7 +4,7 @@ describe('Game', function(){
   var game;
   beforeEach(function(){
     game = new Game(3);
-  })
+  });
 
   describe('board', function(){
     it('should create a properly instantiated board', function(){
@@ -14,7 +14,7 @@ describe('Game', function(){
           expect(cell).to.be.null;
         });
       });
-    })
+    });
   });
   describe('players', function(){
     it('should create two players', function(){
@@ -87,4 +87,4 @@ describe('Game', function(){
       expect(game.checkGameOver()).to.be.true;
     });
   });
-})
+});
