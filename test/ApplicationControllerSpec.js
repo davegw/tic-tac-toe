@@ -4,14 +4,14 @@ describe('Application Controller', function(){
   var app;
   beforeEach(function(){
     app = new ApplicationController(3);
-  })
+  });
 
   describe('properties', function(){
     it('should have a game instance property', function(){
       expect(app.game.board.size).to.equal(3);
       expect(app.game.board.checkDiag()).to.be.false;
       app.game.move(1, 1);
-      expect(app.game.board.get(1, 1)).to.equal('X');
+      expect(app.game.board.get(1, 1)).to.equal('O');
 
     });
   });
@@ -27,6 +27,38 @@ describe('Application Controller', function(){
     });
     it('should have a printCell method', function(){
       expect(app.printCell).to.be.a('function');
+    });
+  });
+
+  var customApp;
+  beforeEach(function(){
+    customApp = new ApplicationController(6, 4);
+  });
+  describe('custom settings', function(){
+    describe('should have a custom size setting', function(){
+      it('should create a custom size board', function(){
+        expect(customApp.game.board.size).to.equal(6);
+        customApp.game.move(1, 2);
+        expect(customApp.game.board.get(1, 2)).to.equal('O');
+      });
+    });
+    describe('should have a custom player setting', function(){
+      it('should create a custom number of players', function(){
+        expect(customApp.game.players.length).to.equal(4);
+      });
+      it('should keep track of the current player', function(){
+        expect(customApp.game.currentPlayer.marker).to.equal('O');
+        customApp.game.move(1, 2);
+        expect(customApp.game.currentPlayer.marker).to.equal('X');
+        customApp.game.move(1, 5);
+        expect(customApp.game.currentPlayer.marker).to.equal('Y');
+        customApp.game.move(0, 3);
+        expect(customApp.game.currentPlayer.marker).to.equal('Z');
+        customApp.game.move(5, 1);
+        expect(customApp.game.currentPlayer.marker).to.equal('O');
+        customApp.game.move(3, 3);
+        expect(customApp.game.currentPlayer.marker).to.equal('X');
+      });
     });
   });
 });

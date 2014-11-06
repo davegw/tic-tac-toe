@@ -1,7 +1,16 @@
-var Game = function(size) {
-  this.board = new Board(size);
-  this.players = [new Player('X'), new Player('O')];
+var Game = function(size, players) {
+  // Set default players to 2.
+  var players = players || 2;
+  var playerMarkers = ['O', 'X', 'Y', 'Z'];
+
+  // Assign players with the appropriate marker for the number of players.
+  this.players = Array.apply(null, Array(players)).map(function(player, idx) {
+    return new Player(playerMarkers[idx]);
+  });
+
+  // Set the current player to the first marker in the players array.
   this.currentPlayer = this.players[0];
+  this.board = new Board(size);
   this.moves = 0;
 };
 
@@ -21,7 +30,8 @@ Game.prototype = {
     this.currentPlayer = this.players[this.moves % this.players.length];
   },
 
-  // Check if board contains all of same marker in row, column or diagonal. Returns true or false.
+  // Check if board contains all of same marker in row, column or diagonal. 
+  // Returns true or false.
   checkForWin: function(row, col) {
     return this.board.checkRow(row) || this.board.checkCol(col) || this.board.checkDiag();
   },

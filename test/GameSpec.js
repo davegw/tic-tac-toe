@@ -19,32 +19,32 @@ describe('Game', function(){
   describe('players', function(){
     it('should create two players', function(){
       expect(game.players.length).to.equal(2);
-      expect(game.players[0].marker).to.equal('X');
-      expect(game.players[1].marker).to.equal('O');
+      expect(game.players[0].marker).to.equal('O');
+      expect(game.players[1].marker).to.equal('X');
     });
-    it('should set "X" as the current player to move', function(){
-      expect(game.currentPlayer.marker).to.equal('X');
+    it('should set "O" as the current player to move', function(){
+      expect(game.currentPlayer.marker).to.equal('O');
     });
   });
   describe('toggle turn', function(){
     it('should toggle the current player after each move', function(){
-      expect(game.currentPlayer.marker).to.equal('X');
+      expect(game.currentPlayer.marker).to.equal('O');
       game.move(0, 0);
-      expect(game.currentPlayer.marker).to.equal('O');
-      game.move(0, 1);
       expect(game.currentPlayer.marker).to.equal('X');
-      game.move(0, 2);
+      game.move(0, 1);
       expect(game.currentPlayer.marker).to.equal('O');
+      game.move(0, 2);
+      expect(game.currentPlayer.marker).to.equal('X');
     });
   });
   describe('move', function(){
     it('should place the piece in the correct cell', function(){
       game.move(0, 0);
       game.move(0, 1);
-      expect(game.board.get(0, 0)).to.equal('X');
-      expect(game.board.get(0, 1)).to.equal('O');
+      expect(game.board.get(0, 0)).to.equal('O');
+      expect(game.board.get(0, 1)).to.equal('X');
       game.move(2, 2);
-      expect(game.board.get(2, 2)).to.equal('X');
+      expect(game.board.get(2, 2)).to.equal('O');
     });
     it('should count the correct number of moves', function(){
       expect(game.moves).to.equal(0);
