@@ -1,3 +1,5 @@
+var Game = require('../models/Game');
+
 var ApplicationController = function(size, players) {
   this.game = new Game(size, players);
   this.statusEl = document.getElementById('status');
@@ -137,3 +139,5 @@ ApplicationController.prototype = {
     this.boardEl.className = '';
   }
 };
+
+module.exports = ApplicationController;

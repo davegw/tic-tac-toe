@@ -1,6 +1,8 @@
 var expect = chai.expect;
+var ApplicationController = require('../../app/controllers/ApplicationController');
+var Game = require('../../app/models/Game');
 
-describe('Application Controller', function(){
+module.exports = describe('Application Controller', function(){
   var app;
   beforeEach(function(){
     app = new ApplicationController(3);

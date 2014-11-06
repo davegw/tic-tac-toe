@@ -1,6 +1,8 @@
 var expect = chai.expect;
+var MenuController = require('../../app/controllers/MenuController');
+var ApplicationController = require('../../app/controllers/ApplicationController');
 
-describe('Menu Controller', function(){
+module.exports = describe('Menu Controller', function(){
   var menu;
   beforeEach(function(){
     menu = new MenuController();

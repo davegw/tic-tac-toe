@@ -1,3 +1,5 @@
+var ApplicationController = require('./ApplicationController');
+
 var MenuController = function() {
   this.app = new ApplicationController();
   this.newGameButton = document.getElementById('new-game');
@@ -19,3 +21,5 @@ MenuController.prototype = {
                     +document.getElementById('game-players-selector').value);
   }
 };
+
+module.exports = MenuController;

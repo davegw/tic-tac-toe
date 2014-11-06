@@ -1,3 +1,6 @@
+var Player = require('./Player');
+var Board = require('./Board');
+
 var Game = function(size, players) {
   // Set default players to 2.
   var players = players || 2;
@@ -65,3 +68,5 @@ Game.prototype = {
     }
   }
 };
+
+module.exports = Game;

@@ -77,3 +77,5 @@ Board.prototype = {
     return this.checkMajorDiag() || this.checkMinorDiag();
   }
 };
+
+module.exports = Board;

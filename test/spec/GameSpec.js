@@ -1,6 +1,9 @@
 var expect = chai.expect;
+var Game = require('../../app/models/Game');
+var Board = require('../../app/models/Board');
+var Player = require('../../app/models/Player');
 
-describe('Game', function(){
+module.exports = describe('Game', function(){
   var game;
   beforeEach(function(){
     game = new Game(3);
