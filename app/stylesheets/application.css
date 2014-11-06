@@ -41,23 +41,10 @@ button:hover {
   max-width: 900px;
   padding: 5px;
   overflow: hidden;
+  text-align: center;
 }
 
-#menu li {
-  list-style-type: none;
-  display: inline-block;
-}
-
-li#restart {
-  float: left;
-}
-
-li#new-game-options {
-  float: right;
-  font-size: 16px;
-}
-
-li#new-game-options > div {
+#new-game-options > div {
   vertical-align: top;
   display: inline-block;
 }

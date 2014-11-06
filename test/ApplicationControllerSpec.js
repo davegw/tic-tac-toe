@@ -8,6 +8,7 @@ describe('Application Controller', function(){
 
   describe('properties', function(){
     it('should have a game instance property', function(){
+      expect(app.game instanceof Game).to.be.true;
       expect(app.game.board.size).to.equal(3);
       expect(app.game.board.checkDiag()).to.be.false;
       app.game.move(1, 1);

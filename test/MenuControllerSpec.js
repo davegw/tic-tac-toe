@@ -8,6 +8,7 @@ describe('Menu Controller', function(){
 
   describe('properties', function(){
     it('should have an application controller instance property', function(){
+      expect(menu.app instanceof ApplicationController).to.be.true;
       expect(menu.app.game.board.size).to.equal(3);
       expect(menu.app.game.board.checkDiag()).to.be.false;
       menu.app.game.move(1, 1);
@@ -19,10 +20,7 @@ describe('Menu Controller', function(){
     it('should have a initialize method', function(){
       expect(menu.initialize).to.be.a('function');
     });
-    it('should have a buildBoard method', function(){
-      expect(menu.restartHandler).to.be.a('function');
-    });
-    it('should have a cellClickHandler method', function(){
+    it('should have a newGameHandler method', function(){
       expect(menu.newGameHandler).to.be.a('function');
     });
   });

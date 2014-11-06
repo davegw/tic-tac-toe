@@ -8,6 +8,7 @@ describe('Game', function(){
 
   describe('board', function(){
     it('should create a properly instantiated board', function(){
+      expect(game.board instanceof Board).to.be.true;
       expect(game.board.size).to.equal(3);
       game.board._board.forEach(function(row) {
         row.forEach(function(cell) {
@@ -19,7 +20,9 @@ describe('Game', function(){
   describe('players', function(){
     it('should create two players', function(){
       expect(game.players.length).to.equal(2);
+      expect(game.players[0] instanceof Player).to.be.true;
       expect(game.players[0].marker).to.equal('O');
+      expect(game.players[1] instanceof Player).to.be.true;
       expect(game.players[1].marker).to.equal('X');
     });
     it('should set "O" as the current player to move', function(){
