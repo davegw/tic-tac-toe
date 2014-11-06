@@ -73,11 +73,12 @@ ApplicationController.prototype = {
 
     // Check for game ending event and display status message if found.
     if (this.game.checkForWin(row, col)) {
-      this.statusEl.className += ' game-over';
+      this.printWinningCombo(row, col);
+      this.gameOver();
       return this.statusEl.innerHTML = 'Player ' + this.game.board.get(row, col) + ' wins!';
     }
     if (this.game.checkGameOver()) {
-      this.statusEl.className += ' game-over';
+      this.gameOver();
       return this.statusEl.innerHTML = 'Tie!';
     }
 
@@ -101,10 +102,38 @@ ApplicationController.prototype = {
     cell.children[0].innerHTML = this.game.board.get(row, col);
   },
 
+  // Add styling to the game winning cell combination.
+  printWinningCombo: function(row, col) {
+    winningCells = this.game.winningCells(row, col);
+    var rows = document.getElementsByClassName('row');
+    for (var i=0; i<winningCells.length; i++) {
+      var cell = winningCells[i];
+      var cellEl = rows[cell[0]].children[cell[1]];
+
+      // Add styling with a delay to create sequential animation.
+      setTimeout(function() {
+        // Store a reference to current element in closure scope.
+        // Otherwise variable will have changed when function is invoked.
+        var delayedCellEl = cellEl;
+
+        return function() {
+          delayedCellEl.className += ' winner';
+        };
+      }(), (2000 * i / winningCells.length));
+    }
+  },
+
+  // Add styling for game over event.
+  gameOver: function() {
+    this.statusEl.className += ' game-over';
+    this.boardEl.className += ' game-over';
+  },
+
   // Reset the game board and status message for the next game.
   resetGame: function() {
     this.statusEl.innerHTML = '';
     this.boardEl.innerHTML = '';
     this.statusEl.className = '';
+    this.boardEl.className = '';
   }
 };

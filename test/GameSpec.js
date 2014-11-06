@@ -87,4 +87,38 @@ describe('Game', function(){
       expect(game.checkGameOver()).to.be.true;
     });
   });
+  describe('winning cells', function(){
+    it('should return an array of the winning row', function(){
+      game.move(0, 0);
+      game.move(1, 0);
+      game.move(0, 1);
+      game.move(1, 2);
+      game.move(0, 2);
+      expect(game.winningCells(0, 2)).to.eql([[0, 0], [0, 1], [0, 2]]);
+    });
+    it('should return an array of the winning column', function(){
+      game.move(0, 2);
+      game.move(1, 0);
+      game.move(1, 2);
+      game.move(1, 1);
+      game.move(2, 2);
+      expect(game.winningCells(2, 2)).to.eql([[0, 2], [1, 2], [2, 2]]);
+    });
+    it('should return an array of the winning major diagonal', function(){
+      game.move(0, 0);
+      game.move(1, 0);
+      game.move(1, 1);
+      game.move(1, 2);
+      game.move(2, 2);
+      expect(game.winningCells(2, 2)).to.eql([[0, 0], [1, 1], [2, 2]]);
+    });
+    it('should return an array of the winning minor diagonal', function(){
+      game.move(0, 2);
+      game.move(1, 0);
+      game.move(1, 1);
+      game.move(1, 2);
+      game.move(2, 0);
+      expect(game.winningCells(2, 0)).to.eql([[2, 0], [1, 1], [0, 2]]);
+    });
+  });
 });

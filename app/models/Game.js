@@ -39,5 +39,29 @@ Game.prototype = {
   // Check if all cells have been filled. Returns true or false.
   checkGameOver: function() {
     return this.moves === this.board.size*this.board.size;
+  },
+
+  // Return an array containing the coordinates of the winning cells.
+  winningCells: function(row, col) {
+    if (this.board.checkRow(row)) {
+      return this.board._board.map(function(_row, idx) {
+        return [row, idx];
+      });
+    }
+    if (this.board.checkCol(col)) {
+      return this.board._board.map(function(_row, idx) {
+        return [idx, col];
+      });
+    }
+    if (this.board.checkMajorDiag()) {
+      return this.board._board.map(function(_row, idx) {
+        return [idx, idx];
+      });
+    }
+    if (this.board.checkMinorDiag()) {
+      return this.board._board.map(function(_row, idx) {
+        return [this.board.size - idx - 1, idx];
+      }.bind(this));
+    }
   }
 };

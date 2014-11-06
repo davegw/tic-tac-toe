@@ -57,18 +57,23 @@ Board.prototype = {
     });
   },
 
-  // Check if diagonals contain all of same marker. Returns true or false.
-  checkDiag: function() {
+  checkMajorDiag: function() {
     var majorDiag = this.get(0, 0);
-    var minorDiag = this.get(0, this.size - 1);
-
-    var checkMajorDiag = majorDiag !== null && this._board.every(function(row, idx) {
+    return majorDiag !== null && this._board.every(function(row, idx) {
       return row[idx] === majorDiag;
     });
-    var checkMinorDiag = minorDiag !== null && this._board.every(function(row, idx) {
+  },
+
+  checkMinorDiag: function() {
+    var minorDiag = this.get(0, this.size - 1);
+
+    return minorDiag !== null && this._board.every(function(row, idx) {
       return row[this.size - 1 - idx] === minorDiag;
     }.bind(this));
+  },
 
-    return checkMajorDiag || checkMinorDiag;
+  // Check if diagonals contain all of same marker. Returns true or false.
+  checkDiag: function() {
+    return this.checkMajorDiag() || this.checkMinorDiag();
   }
 };

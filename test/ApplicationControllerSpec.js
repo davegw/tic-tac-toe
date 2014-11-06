@@ -28,6 +28,15 @@ describe('Application Controller', function(){
     it('should have a printCell method', function(){
       expect(app.printCell).to.be.a('function');
     });
+    it('should have a printWinningCombo method', function(){
+      expect(app.printWinningCombo).to.be.a('function');
+    });
+    it('should have a gameOver method', function(){
+      expect(app.gameOver).to.be.a('function');
+    });
+    it('should have a resetGame method', function(){
+      expect(app.resetGame).to.be.a('function');
+    });
   });
 
   var customApp;
