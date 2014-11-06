@@ -16,6 +16,9 @@
       if (!this.boardEl) {
         return 'No board element';
       }
+
+      // Build an array of cell DOM elements to add to onresize listener.
+      var cells = [];
       this.game.board._board.forEach(function(row, rowIdx) {
         // Create and append row class div to the board div for each row.
         var rowElement = document.createElement('div');
@@ -37,8 +40,19 @@
           cell.onclick = function() {
             this.cellClickHandler(rowIdx, colIdx, cell);
           }.bind(this);
+
+          cells.push(cell);
+
         }.bind(this));
       }.bind(this));
+
+      // Resize the board dimensions whenever the window is resized.
+      window.onresize = function() {
+        this.resizeBoard(cells);
+      }.bind(this);
+
+      // Set the initial board size.
+      this.resizeBoard(cells);
     },
 
     // Handles cell click events by updating game model, view and status.
@@ -69,6 +83,16 @@
       }
     },
 
+    // Resize board dimensions based on the window width.
+    resizeBoard: function(cells) {
+      // Calculate the cell width based on the board width and number of cells per row.
+      // Subtract 1 to avoid rounding bug that cause cells to be wider than board.
+      var cellSize = (this.boardEl.clientWidth - 1) / this.game.board.size;
+      cells.forEach(function(cell) {
+        cell.setAttribute("style", "width: " + cellSize + "px; height: " + cellSize + "px");
+      });
+    },
+
     // Render the cell at the inputted row and column.
     printCell: function(row, col) {
       var cell = document.getElementsByClassName('row')[row].children[col];
@@ -77,5 +101,5 @@
     }
   };
 
-  new ApplicationController();
+  new ApplicationController(9);
 })();
