@@ -1,18 +1,96 @@
-#main {
+body {
+  margin: 0 0 50px 0;
+}
+
+h1, h2, h3, h4, ul, li, p {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: #3498db;
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 1em;
+  padding: 10px;
+}
+
+button:hover {
+  background: #3cb0fd;
+  cursor: pointer;
+}
+
+#title {
+  margin: 0;
+  padding: 10px;
+  color: white;
+  background-color: black;
+  text-align: center;
+}
+
+#navbar {
+  background-color: #B0B0B0;
+  border-bottom: 1px solid black;
+}
+
+#menu {
   margin: 0 auto;
   max-width: 900px;
+  padding: 5px;
+  overflow: hidden;
+}
+
+#menu li {
+  list-style-type: none;
+  display: inline-block;
+}
+
+li#restart {
+  float: left;
+}
+
+li#new-game-options {
+  float: right;
+  font-size: 16px;
+}
+
+li#new-game-options > div {
+  vertical-align: top;
+  display: inline-block;
+}
+
+.game-option-selectors {
+  margin-right: 5px;
+}
+
+#content {
+  margin: 0 auto;
+  max-width: 720px;
   text-align: center;
 }
 
 #status {
-  height: 100px;
+  padding: 15px;
+  height: 25px;
   font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#status.game-over {
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #FFD700;
+  border-bottom: 1px solid black;
 }
 
 #board {
   border: 2px solid black;
   display: inline-block;
-  width: 90%;
+  width: 70%;
   background-color: black;
 }
 
@@ -20,7 +98,7 @@
   border: 2px solid black;
   vertical-align: top;
   display: inline-block;
-  font-size: 30px;
+  font-size: 3.5em;
   font-weight: bold;
   background-color: white;
   -moz-box-sizing: border-box;
@@ -47,4 +125,16 @@
   -moz-transform: translateY(-50%);
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+
+@media only screen and (max-width: 500px) {
+  .cell {
+    font-size: 2em;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .cell {
+    font-size: 1em;
+  }
 }
