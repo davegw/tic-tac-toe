@@ -1,6 +1,6 @@
 var expect = chai.expect;
 var MenuController = require('../../app/controllers/MenuController');
-var ApplicationController = require('../../app/controllers/ApplicationController');
+var GameController = require('../../app/controllers/GameController');
 
 module.exports = describe('Menu Controller', function(){
   var menu;
@@ -9,8 +9,8 @@ module.exports = describe('Menu Controller', function(){
   })
 
   describe('properties', function(){
-    it('should have an application controller instance property', function(){
-      expect(menu.app instanceof ApplicationController).to.be.true;
+    it('should have a game controller instance property', function(){
+      expect(menu.app instanceof GameController).to.be.true;
       expect(menu.app.game.board.size).to.equal(3);
       expect(menu.app.game.board.checkDiag()).to.be.false;
       menu.app.game.move(1, 1);

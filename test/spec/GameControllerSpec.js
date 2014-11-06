@@ -1,11 +1,11 @@
 var expect = chai.expect;
-var ApplicationController = require('../../app/controllers/ApplicationController');
+var GameController = require('../../app/controllers/GameController');
 var Game = require('../../app/models/Game');
 
-module.exports = describe('Application Controller', function(){
+module.exports = describe('Game Controller', function(){
   var app;
   beforeEach(function(){
-    app = new ApplicationController(3);
+    app = new GameController(3);
   });
 
   describe('properties', function(){
@@ -44,7 +44,7 @@ module.exports = describe('Application Controller', function(){
 
   var customApp;
   beforeEach(function(){
-    customApp = new ApplicationController(6, 4);
+    customApp = new GameController(6, 4);
   });
   describe('custom settings', function(){
     describe('should have a custom size setting', function(){

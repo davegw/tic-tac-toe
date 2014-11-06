@@ -1,13 +1,13 @@
 var Game = require('../models/Game');
 
-var ApplicationController = function(size, players) {
+var GameController = function(size, players) {
   this.game = new Game(size, players);
   this.statusEl = document.getElementById('status');
   this.boardEl = document.getElementById('board');
   this.initialize();
 };
 
-ApplicationController.prototype = {
+GameController.prototype = {
   initialize: function() {
     this.buildBoard();
   },
@@ -140,4 +140,4 @@ ApplicationController.prototype = {
   }
 };
 
-module.exports = ApplicationController;
+module.exports = GameController;

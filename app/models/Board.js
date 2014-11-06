@@ -1,4 +1,4 @@
-var Board = (function(size) {
+var Board = function(size) {
   // Set default size to 3 if none entered.
   this.size = size || 3;
 
@@ -22,7 +22,7 @@ var Board = (function(size) {
   this.set = function(row, col, value) {
     return board[row][col] = value;
   };
-});
+};
 
 Board.prototype = {
   // Check if input row contains all of same marker. Returns true or false.

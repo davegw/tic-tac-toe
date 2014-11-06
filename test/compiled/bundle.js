@@ -1,14 +1,14 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Game = require('../models/Game');
 
-var ApplicationController = function(size, players) {
+var GameController = function(size, players) {
   this.game = new Game(size, players);
   this.statusEl = document.getElementById('status');
   this.boardEl = document.getElementById('board');
   this.initialize();
 };
 
-ApplicationController.prototype = {
+GameController.prototype = {
   initialize: function() {
     this.buildBoard();
   },
@@ -141,13 +141,13 @@ ApplicationController.prototype = {
   }
 };
 
-module.exports = ApplicationController;
+module.exports = GameController;
 
 },{"../models/Game":4}],2:[function(require,module,exports){
-var ApplicationController = require('./ApplicationController');
+var GameController = require('./GameController');
 
 var MenuController = function() {
-  this.app = new ApplicationController();
+  this.app = new GameController();
   this.newGameButton = document.getElementById('new-game');
   this.initialize();
 };
@@ -162,7 +162,7 @@ MenuController.prototype = {
   // Handle new game click event by loading an empty board with the desired settings.
   newGameHandler: function() {
     this.app.resetGame();
-    this.app = new ApplicationController(
+    this.app = new GameController(
                     +document.getElementById('game-size-selector').value,
                     +document.getElementById('game-players-selector').value);
   }
@@ -170,8 +170,8 @@ MenuController.prototype = {
 
 module.exports = MenuController;
 
-},{"./ApplicationController":1}],3:[function(require,module,exports){
-var Board = (function(size) {
+},{"./GameController":1}],3:[function(require,module,exports){
+var Board = function(size) {
   // Set default size to 3 if none entered.
   this.size = size || 3;
 
@@ -195,7 +195,7 @@ var Board = (function(size) {
   this.set = function(row, col, value) {
     return board[row][col] = value;
   };
-});
+};
 
 Board.prototype = {
   // Check if input row contains all of same marker. Returns true or false.
@@ -338,88 +338,10 @@ module.exports = Player;
 require('./spec/BoardSpec');
 require('./spec/PlayerSpec');
 require('./spec/GameSpec');
-require('./spec/ApplicationControllerSpec');
+require('./spec/GameControllerSpec');
 require('./spec/MenuControllerSpec');
 
-},{"./spec/ApplicationControllerSpec":7,"./spec/BoardSpec":8,"./spec/GameSpec":9,"./spec/MenuControllerSpec":10,"./spec/PlayerSpec":11}],7:[function(require,module,exports){
-var expect = chai.expect;
-var ApplicationController = require('../../app/controllers/ApplicationController');
-var Game = require('../../app/models/Game');
-
-module.exports = describe('Application Controller', function(){
-  var app;
-  beforeEach(function(){
-    app = new ApplicationController(3);
-  });
-
-  describe('properties', function(){
-    it('should have a game instance property', function(){
-      expect(app.game instanceof Game).to.be.true;
-      expect(app.game.board.size).to.equal(3);
-      expect(app.game.board.checkDiag()).to.be.false;
-      app.game.move(1, 1);
-      expect(app.game.board.get(1, 1)).to.equal('O');
-
-    });
-  });
-  describe('methods', function(){
-    it('should have a initialize method', function(){
-      expect(app.initialize).to.be.a('function');
-    });
-    it('should have a buildBoard method', function(){
-      expect(app.buildBoard).to.be.a('function');
-    });
-    it('should have a cellClickHandler method', function(){
-      expect(app.cellClickHandler).to.be.a('function');
-    });
-    it('should have a printCell method', function(){
-      expect(app.printCell).to.be.a('function');
-    });
-    it('should have a printWinningCombo method', function(){
-      expect(app.printWinningCombo).to.be.a('function');
-    });
-    it('should have a gameOver method', function(){
-      expect(app.gameOver).to.be.a('function');
-    });
-    it('should have a resetGame method', function(){
-      expect(app.resetGame).to.be.a('function');
-    });
-  });
-
-  var customApp;
-  beforeEach(function(){
-    customApp = new ApplicationController(6, 4);
-  });
-  describe('custom settings', function(){
-    describe('should have a custom size setting', function(){
-      it('should create a custom size board', function(){
-        expect(customApp.game.board.size).to.equal(6);
-        customApp.game.move(1, 2);
-        expect(customApp.game.board.get(1, 2)).to.equal('O');
-      });
-    });
-    describe('should have a custom player setting', function(){
-      it('should create a custom number of players', function(){
-        expect(customApp.game.players.length).to.equal(4);
-      });
-      it('should keep track of the current player', function(){
-        expect(customApp.game.currentPlayer.marker).to.equal('O');
-        customApp.game.move(1, 2);
-        expect(customApp.game.currentPlayer.marker).to.equal('X');
-        customApp.game.move(1, 5);
-        expect(customApp.game.currentPlayer.marker).to.equal('Y');
-        customApp.game.move(0, 3);
-        expect(customApp.game.currentPlayer.marker).to.equal('Z');
-        customApp.game.move(5, 1);
-        expect(customApp.game.currentPlayer.marker).to.equal('O');
-        customApp.game.move(3, 3);
-        expect(customApp.game.currentPlayer.marker).to.equal('X');
-      });
-    });
-  });
-});
-
-},{"../../app/controllers/ApplicationController":1,"../../app/models/Game":4}],8:[function(require,module,exports){
+},{"./spec/BoardSpec":7,"./spec/GameControllerSpec":8,"./spec/GameSpec":9,"./spec/MenuControllerSpec":10,"./spec/PlayerSpec":11}],7:[function(require,module,exports){
 var expect = chai.expect;
 var Board = require('../../app/models/Board');
 
@@ -496,7 +418,85 @@ module.exports = describe('Board', function(){
   });
 });
 
-},{"../../app/models/Board":3}],9:[function(require,module,exports){
+},{"../../app/models/Board":3}],8:[function(require,module,exports){
+var expect = chai.expect;
+var GameController = require('../../app/controllers/GameController');
+var Game = require('../../app/models/Game');
+
+module.exports = describe('Game Controller', function(){
+  var app;
+  beforeEach(function(){
+    app = new GameController(3);
+  });
+
+  describe('properties', function(){
+    it('should have a game instance property', function(){
+      expect(app.game instanceof Game).to.be.true;
+      expect(app.game.board.size).to.equal(3);
+      expect(app.game.board.checkDiag()).to.be.false;
+      app.game.move(1, 1);
+      expect(app.game.board.get(1, 1)).to.equal('O');
+
+    });
+  });
+  describe('methods', function(){
+    it('should have a initialize method', function(){
+      expect(app.initialize).to.be.a('function');
+    });
+    it('should have a buildBoard method', function(){
+      expect(app.buildBoard).to.be.a('function');
+    });
+    it('should have a cellClickHandler method', function(){
+      expect(app.cellClickHandler).to.be.a('function');
+    });
+    it('should have a printCell method', function(){
+      expect(app.printCell).to.be.a('function');
+    });
+    it('should have a printWinningCombo method', function(){
+      expect(app.printWinningCombo).to.be.a('function');
+    });
+    it('should have a gameOver method', function(){
+      expect(app.gameOver).to.be.a('function');
+    });
+    it('should have a resetGame method', function(){
+      expect(app.resetGame).to.be.a('function');
+    });
+  });
+
+  var customApp;
+  beforeEach(function(){
+    customApp = new GameController(6, 4);
+  });
+  describe('custom settings', function(){
+    describe('should have a custom size setting', function(){
+      it('should create a custom size board', function(){
+        expect(customApp.game.board.size).to.equal(6);
+        customApp.game.move(1, 2);
+        expect(customApp.game.board.get(1, 2)).to.equal('O');
+      });
+    });
+    describe('should have a custom player setting', function(){
+      it('should create a custom number of players', function(){
+        expect(customApp.game.players.length).to.equal(4);
+      });
+      it('should keep track of the current player', function(){
+        expect(customApp.game.currentPlayer.marker).to.equal('O');
+        customApp.game.move(1, 2);
+        expect(customApp.game.currentPlayer.marker).to.equal('X');
+        customApp.game.move(1, 5);
+        expect(customApp.game.currentPlayer.marker).to.equal('Y');
+        customApp.game.move(0, 3);
+        expect(customApp.game.currentPlayer.marker).to.equal('Z');
+        customApp.game.move(5, 1);
+        expect(customApp.game.currentPlayer.marker).to.equal('O');
+        customApp.game.move(3, 3);
+        expect(customApp.game.currentPlayer.marker).to.equal('X');
+      });
+    });
+  });
+});
+
+},{"../../app/controllers/GameController":1,"../../app/models/Game":4}],9:[function(require,module,exports){
 var expect = chai.expect;
 var Game = require('../../app/models/Game');
 var Board = require('../../app/models/Board');
@@ -631,7 +631,7 @@ module.exports = describe('Game', function(){
 },{"../../app/models/Board":3,"../../app/models/Game":4,"../../app/models/Player":5}],10:[function(require,module,exports){
 var expect = chai.expect;
 var MenuController = require('../../app/controllers/MenuController');
-var ApplicationController = require('../../app/controllers/ApplicationController');
+var GameController = require('../../app/controllers/GameController');
 
 module.exports = describe('Menu Controller', function(){
   var menu;
@@ -640,8 +640,8 @@ module.exports = describe('Menu Controller', function(){
   })
 
   describe('properties', function(){
-    it('should have an application controller instance property', function(){
-      expect(menu.app instanceof ApplicationController).to.be.true;
+    it('should have a game controller instance property', function(){
+      expect(menu.app instanceof GameController).to.be.true;
       expect(menu.app.game.board.size).to.equal(3);
       expect(menu.app.game.board.checkDiag()).to.be.false;
       menu.app.game.move(1, 1);
@@ -659,7 +659,7 @@ module.exports = describe('Menu Controller', function(){
   });
 });
 
-},{"../../app/controllers/ApplicationController":1,"../../app/controllers/MenuController":2}],11:[function(require,module,exports){
+},{"../../app/controllers/GameController":1,"../../app/controllers/MenuController":2}],11:[function(require,module,exports){
 var expect = chai.expect;
 var Player = require('../../app/models/Player');
 

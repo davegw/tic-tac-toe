@@ -6,14 +6,14 @@ new MenuController();
 },{"./controllers/MenuController":3}],2:[function(require,module,exports){
 var Game = require('../models/Game');
 
-var ApplicationController = function(size, players) {
+var GameController = function(size, players) {
   this.game = new Game(size, players);
   this.statusEl = document.getElementById('status');
   this.boardEl = document.getElementById('board');
   this.initialize();
 };
 
-ApplicationController.prototype = {
+GameController.prototype = {
   initialize: function() {
     this.buildBoard();
   },
@@ -146,13 +146,13 @@ ApplicationController.prototype = {
   }
 };
 
-module.exports = ApplicationController;
+module.exports = GameController;
 
 },{"../models/Game":5}],3:[function(require,module,exports){
-var ApplicationController = require('./ApplicationController');
+var GameController = require('./GameController');
 
 var MenuController = function() {
-  this.app = new ApplicationController();
+  this.app = new GameController();
   this.newGameButton = document.getElementById('new-game');
   this.initialize();
 };
@@ -167,7 +167,7 @@ MenuController.prototype = {
   // Handle new game click event by loading an empty board with the desired settings.
   newGameHandler: function() {
     this.app.resetGame();
-    this.app = new ApplicationController(
+    this.app = new GameController(
                     +document.getElementById('game-size-selector').value,
                     +document.getElementById('game-players-selector').value);
   }
@@ -175,8 +175,8 @@ MenuController.prototype = {
 
 module.exports = MenuController;
 
-},{"./ApplicationController":2}],4:[function(require,module,exports){
-var Board = (function(size) {
+},{"./GameController":2}],4:[function(require,module,exports){
+var Board = function(size) {
   // Set default size to 3 if none entered.
   this.size = size || 3;
 
@@ -200,7 +200,7 @@ var Board = (function(size) {
   this.set = function(row, col, value) {
     return board[row][col] = value;
   };
-});
+};
 
 Board.prototype = {
   // Check if input row contains all of same marker. Returns true or false.
