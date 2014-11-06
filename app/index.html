@@ -8,12 +8,51 @@
   </head>
   <body>
     <div id="main">
+      <div id="title">
+        <h1>Tic-Tac-Toe</h1>
+      </div>
+      <div id="navbar">
+        <div id="menu">
+          <ul>
+            <li id="restart">
+              <button>Restart</button>
+            </li>
+            <li id="new-game-options">
+              <div>
+                <div>Players:</div>
+                <select id="game-players-selector" class="game-option-selectors">
+                  <option value="2">2 (default)</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+              <div>
+                <div>Board Size:</div>
+                <select id="game-size-selector" class="game-option-selectors">
+                  <option value="3">3 (default)</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                </select>
+              </div>
+              <button id="new-game">New Game</button>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div id="status"></div>
-      <div id="board"></div>
+      <div id="content">
+        <div id="board"></div>
+      </div>
     </div>
     <script src="Player.js"></script>
     <script src="Board.js"></script>
     <script src="Game.js"></script>
     <script src="ApplicationController.js"></script>
+    <script src="MenuController.js"></script>
+    <script type="text/javascript">new MenuController()</script>
   </body>
 </html>
